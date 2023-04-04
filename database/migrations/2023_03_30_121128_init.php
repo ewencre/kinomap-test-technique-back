@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string("name");
             $table->string("description");
             $table->time("duration");
+            $table->timestamps();
         });
 
         Schema::create("users", function (Blueprint $table) {

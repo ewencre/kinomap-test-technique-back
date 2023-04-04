@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'users'], function()
+{
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/{userId}', [UserController::class, 'show']);
+    Route::get('/{userId}/activities/{activityId}', [UserController::class, 'activities']);
+});
+
+Route::group(['prefix' => 'activities'], function()
+{
+    Route::get('/', [ActivityController::class, 'index']);
+    Route::get('/{activityId}', [ActivityController::class, 'show']);
 });
